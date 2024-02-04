@@ -25,6 +25,14 @@ def print_msg(event: Event):
     print('Текст:', event.text)
 
 
+def echo(event: Event, api):
+    api.messages.send(
+        user_id=event.user_id,
+        message=event.text,
+        random_id=get_random_id(),
+    )
+
+
 def send_answer(api, user_id, message):
     api.messages.send(
         user_id=user_id,
