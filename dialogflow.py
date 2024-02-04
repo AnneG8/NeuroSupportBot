@@ -1,9 +1,7 @@
 import logging
 
-from environs import Env
 from google.cloud import api_keys_v2
 from google.cloud.api_keys_v2 import Key
-from google.cloud.dialogflow_v2beta1.types import DetectIntentResponse
 
 
 logger = logging.getLogger(__name__)

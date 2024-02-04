@@ -2,7 +2,7 @@ from environs import Env
 import requests
 
 from pathlib import Path
-from urllib.parse import urlparse, quote
+from urllib.parse import urlparse
 import argparse
 import json
 
