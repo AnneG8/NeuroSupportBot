@@ -1,4 +1,5 @@
 import logging
+from typing import List
 
 from google.cloud import api_keys_v2
 from google.cloud.api_keys_v2 import Key
@@ -45,7 +46,8 @@ def detect_intent_text(project_id, session_id, text, language_code):
     return response.query_result.fulfillment_text
 
 
-def create_intent(project_id, display_name, training_phrases_parts, message_text):
+def create_intent(project_id, display_name, training_phrases_parts,
+                  message_texts: str | List[str]):
     from google.cloud import dialogflow
 
     intents_client = dialogflow.IntentsClient()
@@ -57,7 +59,9 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
         training_phrase = dialogflow.Intent.TrainingPhrase(parts=[part])
         training_phrases.append(training_phrase)
 
-    text = dialogflow.Intent.Message.Text(text=[message_text])
+    if isinstance(message_texts, str):
+        message_texts = [message_texts]
+    text = dialogflow.Intent.Message.Text(text=message_texts)
     message = dialogflow.Intent.Message(text=text)
 
     intent = dialogflow.Intent(
