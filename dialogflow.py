@@ -39,11 +39,11 @@ def detect_intent_text(project_id, session_id, text, language_code):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    if response.query_result.intent_detection_confidence:
-        logger.info('Successful response.')
-    else:
+    if response.query_result.intent.is_fallback:
         logger.info('Failed to recognize intent.')
+        return None
 
+    logger.info('Successful response.')
     return response.query_result.fulfillment_text
 
 

@@ -33,10 +33,10 @@ def echo(event: Event, api):
     )
 
 
-def send_answer(api, user_id, message):
+def send_answer(api, user_id, answer):
     api.messages.send(
         user_id=user_id,
-        message=message,
+        message=answer,
         random_id=get_random_id(),
     )
 
@@ -57,16 +57,14 @@ def main():
             print_msg(event)
             if event.to_me:
                 user_id = event.user_id
-                message = detect_intent_text(
+                answer = detect_intent_text(
                     project_id,
                     user_id,
                     event.text,
                     'ru-Ru'
                 )
-                send_answer(vk, user_id, message)
-
-
-
+                if answer:
+                    send_answer(vk, user_id, answer)
 
 
 if __name__ == '__main__':
