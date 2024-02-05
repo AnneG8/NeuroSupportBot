@@ -36,8 +36,8 @@ def main():
     env = Env()
     env.read_env()
 
-    tg_bot_token = env('ADMIN_TG_BOT_TOKEN')
-    admin_chat_id = env('ADMIN_TG_CHAT_ID')
+    tg_bot_token = env('ADMIN_TG_BOT_TOKEN', None)
+    admin_chat_id = env('ADMIN_TG_CHAT_ID', None)
     if tg_bot_token and admin_chat_id:
         start_admin_alert(__name__, tg_bot_token, admin_chat_id)
 
