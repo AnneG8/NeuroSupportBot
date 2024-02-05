@@ -1,19 +1,10 @@
-import logging
-
 import vk_api
 from vk_api.longpoll import VkLongPoll, VkEventType, Event
 from vk_api.utils import get_random_id
 from environs import Env
 
+from admin_alert import start_admin_alert
 from dialogflow import detect_intent_text
-
-
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
-)
-
-logger = logging.getLogger(__name__)
 
 
 def print_msg(event: Event):
@@ -44,6 +35,12 @@ def send_answer(api, user_id, answer):
 def main():
     env = Env()
     env.read_env()
+
+    tg_bot_token = env('ADMIN_TG_BOT_TOKEN')
+    admin_chat_id = env('ADMIN_TG_CHAT_ID')
+    if tg_bot_token and admin_chat_id:
+        start_admin_alert(__name__, tg_bot_token, admin_chat_id)
+
     vk_bot_token = env.str('VK_BOT_TOKEN')
     project_id = env.str('DIALOGFLOW_PROJECT_ID')
 
