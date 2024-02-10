@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from google.cloud import api_keys_v2
+from google.cloud import api_keys_v2, dialogflow
 from google.cloud.api_keys_v2 import Key
 
 
@@ -25,8 +25,6 @@ def create_api_key(project_id: str, suffix: str) -> Key:
 
 
 def detect_intent_text(project_id, session_id, text, language_code):
-    from google.cloud import dialogflow
-
     session_client = dialogflow.SessionsClient()
 
     session = session_client.session_path(project_id, session_id)
@@ -48,8 +46,6 @@ def detect_intent_text(project_id, session_id, text, language_code):
 
 def create_intent(project_id, display_name, training_phrases_parts,
                   message_texts: str | List[str]):
-    from google.cloud import dialogflow
-
     intents_client = dialogflow.IntentsClient()
 
     parent = dialogflow.AgentsClient.agent_path(project_id)
