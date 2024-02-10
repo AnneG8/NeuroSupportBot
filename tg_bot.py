@@ -28,7 +28,7 @@ def start(update: Update, context: CallbackContext):
 def reply(update: Update, context: CallbackContext):
     update.message.reply_text(detect_intent_text(
         project_id,
-        update.message.chat_id,
+        f'vk-{update.message.chat_id}',
         update.message.text,
         'ru-Ru'
     ))
