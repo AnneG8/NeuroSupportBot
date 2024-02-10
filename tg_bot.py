@@ -25,7 +25,7 @@ def start(update: Update, context: CallbackContext):
     update.message.reply_text('Здравствуйте!')
 
 
-def echo(update: Update, context: CallbackContext):
+def reply(update: Update, context: CallbackContext):
     update.message.reply_text(detect_intent_text(
         project_id,
         update.message.chat_id,
@@ -46,7 +46,7 @@ def main():
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, reply))
 
     updater.start_polling()
     updater.idle()
