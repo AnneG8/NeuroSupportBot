@@ -32,12 +32,9 @@ def create_parser():
 
 def is_valid_json_url(json_url):
     parsed_url = urlparse(json_url)
-    if (parsed_url.scheme and
-        parsed_url.netloc and
-        parsed_url.path.endswith('.json')):
-        return True
-    else:
-        return False
+    return (parsed_url.scheme and
+            parsed_url.netloc and
+            parsed_url.path.endswith('.json'))
 
 
 def is_valid_file_path(filepath):
