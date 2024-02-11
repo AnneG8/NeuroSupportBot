@@ -45,10 +45,10 @@ def main():
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW:
             if event.to_me:
-                user_id = f'vk-{event.user_id}'
+                user_id = event.user_id
                 answer = detect_intent_text(
                     project_id,
-                    user_id,
+                    f'vk-{user_id}',
                     event.text,
                     'ru-Ru'
                 )
