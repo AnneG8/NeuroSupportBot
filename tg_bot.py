@@ -9,10 +9,6 @@ from bot_logs_handler import BotLogsHandler
 from dialogflow import detect_intent_text
 
 
-logging.basicConfig(
-    level=logging.WARNING,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
 logger = logging.getLogger('tg_bot')
 
 
@@ -53,4 +49,8 @@ def main():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        level=logging.WARNING,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
     main()
