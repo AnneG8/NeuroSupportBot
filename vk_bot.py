@@ -42,13 +42,13 @@ def main():
         if event.type == VkEventType.MESSAGE_NEW:
             if event.to_me:
                 user_id = event.user_id
-                answer = detect_intent_text(
+                is_fallback, answer = detect_intent_text(
                     project_id,
                     f'vk-{user_id}',
                     event.text,
                     'ru-Ru'
                 )
-                if answer:
+                if is_fallback:
                     send_answer(vk, user_id, answer)
 
 

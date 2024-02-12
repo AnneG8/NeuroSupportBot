@@ -27,7 +27,7 @@ def reply(update: Update, context: CallbackContext):
         f'vk-{update.message.chat_id}',
         update.message.text,
         'ru-Ru'
-    ))
+    )[1])
 
 
 def main():
