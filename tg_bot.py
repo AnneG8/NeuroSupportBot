@@ -1,3 +1,4 @@
+import functools
 import logging
 
 from environs import Env
@@ -12,16 +13,11 @@ from dialogflow import detect_intent_text
 logger = logging.getLogger('tg_bot')
 
 
-env = Env()
-env.read_env()
-project_id = env.str('DIALOGFLOW_PROJECT_ID')
-
-
 def start(update: Update, context: CallbackContext):
     update.message.reply_text('Здравствуйте!')
 
 
-def reply(update: Update, context: CallbackContext):
+def project_reply(project_id, update: Update, context: CallbackContext):
     update.message.reply_text(detect_intent_text(
         project_id,
         f'vk-{update.message.chat_id}',
@@ -31,6 +27,12 @@ def reply(update: Update, context: CallbackContext):
 
 
 def main():
+    env = Env()
+    env.read_env()
+
+    project_id = env.str('DIALOGFLOW_PROJECT_ID')
+    reply = functools.partial(project_reply, project_id)
+
     tg_bot_token = env('ADMIN_TG_BOT_TOKEN', None)
     admin_chat_id = env('ADMIN_TG_CHAT_ID', None)
     if tg_bot_token and admin_chat_id:
