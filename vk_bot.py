@@ -21,6 +21,11 @@ def send_answer(api, user_id, answer):
 
 
 def main():
+    logging.basicConfig(
+        level=logging.WARNING,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
     env = Env()
     env.read_env()
 
@@ -53,8 +58,4 @@ def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(
-        level=logging.WARNING,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
     main()
