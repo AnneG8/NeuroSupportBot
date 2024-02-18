@@ -18,12 +18,13 @@ def start(update: Update, context: CallbackContext):
 
 
 def project_reply(project_id, update: Update, context: CallbackContext):
-    update.message.reply_text(detect_intent_text(
+    __, answer = detect_intent_text(
         project_id,
         f'vk-{update.message.chat_id}',
         update.message.text,
         'ru-Ru'
-    )[1])
+    )
+    update.message.reply_text(answer)
 
 
 def main():
